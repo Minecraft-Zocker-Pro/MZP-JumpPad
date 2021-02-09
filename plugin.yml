@@ -1,0 +1,16 @@
+name: MZP-JumpPad
+main: minecraft.jumppad.zocker.pro.Main
+author: ludgart
+version: 0.0.1
+website: https://minecraft.plugin.zocker.pro/
+depend: [MZP-Core]
+softdepend: [MZP-Statistic]
+
+api-version: 1.13
+
+commands:
+  jumppad:
+    usage: /jumppad
+    description: jumppad
+    permission: mzp.jumppad.command
+    aliases: [ jumpp ]
