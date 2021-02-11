@@ -11,13 +11,14 @@ import org.bukkit.entity.Player;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 public class JumpPadManager {
 
-	private static final List<UUID> JUMP_PAD_PLAYERS = new ArrayList<>();
+	private static final HashMap<UUID, Long> JUMP_PAD_PLAYERS = new HashMap<>();
 	private static final List<JumpPad> JUMP_PAD_LIST = new ArrayList<>();
 
 	public static void loadAll() {
@@ -82,9 +83,7 @@ public class JumpPadManager {
 		if (jumpPad == null) return null;
 		if (!JUMP_PAD_LIST.contains(jumpPad)) return null;
 
-		Zocker dummy = new Zocker("dummy");
-
-		return dummy.set(
+		return new Zocker("dummy").set(
 			Main.JUMPPAD_DATABASE_TABLE,
 			new String[]{"jumppad_uuid", "location_world", "location_x", "location_y", "location_z", "power", "height", "permission", "particle", "sound", "effect"},
 			new Object[]{jumpPad.getUuid(), jumpPad.getLocation().getWorld().getName(), jumpPad.getLocation().getX(), jumpPad.getLocation().getY(), jumpPad.getLocation().getZ(), jumpPad.getPower(), jumpPad.getHeight(), jumpPad.getPermission(), jumpPad.getParticle(), jumpPad.getSound().name(),
@@ -94,12 +93,20 @@ public class JumpPadManager {
 	}
 
 	public void addJumping(Player player) {
-		if (JUMP_PAD_PLAYERS.contains(player.getUniqueId())) return;
-		JUMP_PAD_PLAYERS.add(player.getUniqueId());
+		JUMP_PAD_PLAYERS.putIfAbsent(player.getUniqueId(), System.currentTimeMillis() / 1000);
 	}
 
 	public boolean isJumping(Player player) {
-		return JUMP_PAD_PLAYERS.contains(player.getUniqueId());
+		return JUMP_PAD_PLAYERS.containsKey(player.getUniqueId());
+	}
+
+	public long isJumpingSince(Player player) {
+		if (JUMP_PAD_PLAYERS.get(player.getUniqueId()) != null) {
+			return (System.currentTimeMillis() / 1000) - JUMP_PAD_PLAYERS.get(player.getUniqueId());
+		}
+
+		addJumping(player);
+		return 0;
 	}
 
 	public void removeJumping(Player player) {
@@ -112,9 +119,7 @@ public class JumpPadManager {
 
 		JUMP_PAD_LIST.add(jumpPad);
 
-		Zocker dummy = new Zocker("dummy");
-
-		return dummy.insert(
+		return new Zocker("dummy").insert(
 			Main.JUMPPAD_DATABASE_TABLE,
 			new String[]{"jumppad_uuid", "location_world", "location_x", "location_y", "location_z", "power", "height", "permission", "particle", "sound", "effect"},
 			new Object[]{jumpPad.getUuid(), jumpPad.getLocation().getWorld().getName(), jumpPad.getLocation().getX(), jumpPad.getLocation().getY(), jumpPad.getLocation().getZ(), jumpPad.getPower(), jumpPad.getHeight(), jumpPad.getPermission(), jumpPad.getParticle(), jumpPad.getSound().name(),

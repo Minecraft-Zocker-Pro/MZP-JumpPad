@@ -1,6 +1,5 @@
 package minecraft.jumppad.zocker.pro.listener;
 
-import minecraft.core.zocker.pro.compatibility.CompatibleMessage;
 import minecraft.core.zocker.pro.compatibility.CompatibleParticleHandler;
 import minecraft.core.zocker.pro.compatibility.CompatibleSound;
 import minecraft.core.zocker.pro.hook.HookManager;
@@ -23,10 +22,10 @@ public class PlayerJumpPadListener implements Listener {
 		if (e.isCancelled()) return;
 
 		JumpPadManager jumpPadManager = new JumpPadManager();
+		JumpPad jumpPad = e.getJumpPad();
 		Player player = e.getPlayer();
 
-		if (jumpPadManager.isJumping(player)) return;
-		JumpPad jumpPad = e.getJumpPad();
+		jumpPadManager.removeJumping(player);
 
 		if (jumpPad.getPermission() != null && jumpPad.getPermission().length() > 0) {
 			if (player.hasPermission(jumpPad.getPermission())) {
