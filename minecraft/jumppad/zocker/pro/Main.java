@@ -39,7 +39,7 @@ public class Main extends CorePlugin {
 
 		HookManager hookManager = new HookManager();
 		hookManager.load("MZP-Statistic");
-		
+
 		if (hookManager.isLoaded("MZP-Statistic")) {
 			StatisticManager.register("JUMPPAD_USED");
 		}
@@ -73,6 +73,8 @@ public class Main extends CorePlugin {
 		if (Main.JUMPPAD_CONFIG.getBool("jumppad.land.sound")) {
 			pluginManager.registerEvents(new PlayerJumpPadLandListener(), this);
 		}
+
+		pluginManager.registerEvents(new PlayerJumpPadPlaceListener(), this);
 	}
 
 	@Override
@@ -90,8 +92,10 @@ public class Main extends CorePlugin {
 		// Message
 		JUMPPAD_MESSAGE = new Config("message.yml", this.getPluginName());
 		JUMPPAD_MESSAGE.set("jumppad.prefix", "&6&l[JumpPad]&3 ", "0.0.1");
+		JUMPPAD_MESSAGE.set("jumppad.player.offline", "&6%player%&3 is not online.", "0.0.3");
+		JUMPPAD_MESSAGE.set("jumppad.item.display", "&6&lJumpPad", "0.0.3");
 
-		JUMPPAD_MESSAGE.setVersion("0.0.1", true);
+		JUMPPAD_MESSAGE.setVersion("0.0.3", true);
 	}
 
 	@Override

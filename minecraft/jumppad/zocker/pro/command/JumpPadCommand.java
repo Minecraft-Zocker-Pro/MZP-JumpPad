@@ -19,6 +19,7 @@ public class JumpPadCommand extends Command {
 		SUB_COMMAND_LIST.add(new JumpPadCreateCommand());
 		SUB_COMMAND_LIST.add(new JumpPadListCommand());
 		SUB_COMMAND_LIST.add(new JumpPadDeleteCommand());
+		SUB_COMMAND_LIST.add(new JumpPadGiveCommand());
 	}
 
 	@Override
@@ -27,8 +28,10 @@ public class JumpPadCommand extends Command {
 			if (sender instanceof Player) {
 				CompatibleMessage.sendMessage(sender, "§3/jumppad create");
 				CompatibleMessage.sendMessage(sender, "§3/jumppad delete <id>");
-				CompatibleMessage.sendMessage(sender, "§3/jumppad list");
 			}
+
+			CompatibleMessage.sendMessage(sender, "§3/jumppad give <player> <amount>");
+			CompatibleMessage.sendMessage(sender, "§3/jumppad list");
 
 			return;
 		}
