@@ -1,10 +1,8 @@
 package minecraft.jumppad.zocker.pro.listener;
 
-import minecraft.jumppad.zocker.pro.JumpPad;
 import minecraft.jumppad.zocker.pro.JumpPadManager;
 import minecraft.jumppad.zocker.pro.event.PlayerJumpPadLandEvent;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

@@ -45,8 +45,10 @@ public class PlayerJumpPadListener implements Listener {
 				jumpPad.getLocation(), 2);
 		}
 
-		if (!Main.JUMPPAD_CONFIG.getBool("jumppad.land.damage")) {
-			jumpPadManager.addJumping(player);
+		jumpPadManager.addJumping(player);
+
+
+		if (Main.JUMPPAD_CONFIG.getBool("jumppad.land.damage")) {
 			if (e.isAsynchronous()) {
 				new BukkitRunnable() {
 					@Override
