@@ -87,6 +87,9 @@ public class Main extends CorePlugin {
 		JUMPPAD_CONFIG.set("jumppad.land.damage", false, "0.0.1");
 		JUMPPAD_CONFIG.set("jumppad.land.sound", true, "0.0.1");
 
+		// Should we play the sound direct to the player or to the world?
+		JUMPPAD_CONFIG.set("jumppad.sound.player", true, "0.0.5");
+
 		JUMPPAD_CONFIG.setVersion("0.0.1", true);
 
 		// Message
@@ -95,7 +98,7 @@ public class Main extends CorePlugin {
 		JUMPPAD_MESSAGE.set("jumppad.player.offline", "&6%player%&3 is not online.", "0.0.3");
 		JUMPPAD_MESSAGE.set("jumppad.item.display", "&6&lJumpPad", "0.0.3");
 
-		JUMPPAD_MESSAGE.setVersion("0.0.3", true);
+		JUMPPAD_MESSAGE.setVersion("0.0.5", true);
 	}
 
 	@Override

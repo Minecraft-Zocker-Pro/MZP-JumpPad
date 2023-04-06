@@ -37,7 +37,11 @@ public class PlayerJumpPadListener implements Listener {
 		player.setVelocity(player.getLocation().getDirection().multiply(jumpPad.getPower()).setY(jumpPad.getHeight()));
 
 		// Sound
-		jumpPad.getSound().play(player.getWorld(), jumpPad.getLocation(), 2F, 2F);
+		if (Main.JUMPPAD_CONFIG.getBool("jumppad.sound.player")) {
+			jumpPad.getSound().play(player, 2F, 2F);
+		} else {
+			jumpPad.getSound().play(player.getWorld(), jumpPad.getLocation(), 2F, 2F);
+		}
 
 		if (jumpPad.getEffectType() == JumpPadEffectType.EXPLODE) {
 			CompatibleParticleHandler.spawnParticles(

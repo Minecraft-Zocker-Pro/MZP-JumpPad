@@ -1,7 +1,7 @@
 name: MZP-JumpPad
 main: minecraft.jumppad.zocker.pro.Main
 author: ludgart
-version: 0.0.4
+version: 0.0.5
 website: https://minecraft.plugin.zocker.pro/
 depend: [MZP-Core]
 softdepend: [MZP-Statistic]
